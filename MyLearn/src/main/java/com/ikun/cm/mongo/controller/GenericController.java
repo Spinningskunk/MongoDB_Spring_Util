@@ -38,8 +38,8 @@ public abstract class GenericController<T, ID, S extends GenericService<T, ID>> 
 
 
     /**
-     * 获取所有数据 并且组装为一个集合
-     * @return List<T>
+     * Retrieves all entities and returns them as a list.
+     * @return ApiResponseDTO containing a list of all entities.
      */
     @GetMapping("getAll")
     public ApiResponseDTO<List<T>> getAll() {
@@ -57,10 +57,10 @@ public abstract class GenericController<T, ID, S extends GenericService<T, ID>> 
     }
 
     /**
-     * 保存实体类
-     * 注意  此处是用save而非insert实现的 所以如果实体类的_id是有属性的 可以达到更新的效果
-     * @param entity
-     * @return
+     * Saves an entity.
+     * This method uses `save` instead of `insert`, so if the entity already has an ID, it will perform an update.
+     * @param entity The entity to save or update.
+     * @return ApiResponseDTO containing the saved or updated entity.
      */
     @PostMapping("/create")
     public ApiResponseDTO<T> create(@RequestBody T entity) {
@@ -68,9 +68,10 @@ public abstract class GenericController<T, ID, S extends GenericService<T, ID>> 
     }
 
     /**
-     * 这里可以传入String的 合理的bson风格的criteria
-     * @param document
-     * @return
+     * Executes a potentially dangerous query.
+     * You can pass a valid BSON-style criteria document as a string.
+     * @param document The BSON query document.
+     * @return ApiResponseDTO containing the result of the query.
      */
     @PostMapping("/dangerousQuery")
     public ApiResponseDTO<List<T>> dangerousQuery(@RequestBody Document document) {
@@ -79,8 +80,9 @@ public abstract class GenericController<T, ID, S extends GenericService<T, ID>> 
 
 
     /**
-     * 根据id删除数据
-     * @param _id
+     * Deletes an entity by its ID (performs a physical delete).
+     * @param _id The ID of the entity to delete.
+     * @return ApiResponseDTO indicating the operation was successful.
      */
     @GetMapping("/deleteByID")
     public ApiResponseDTO realDeleteByID(@ApiParam(value = "业务数据的id 是真删除(物理)") @RequestParam(value = "_id") ID _id) {
@@ -89,8 +91,9 @@ public abstract class GenericController<T, ID, S extends GenericService<T, ID>> 
     }
 
     /**
-     * 根据id删除数据
-     * @param _id
+     * Performs a fake delete (soft delete) by marking the entity as deleted but not removing it from the database.
+     * @param _id The ID of the entity to fake delete.
+     * @return ApiResponseDTO indicating the operation was successful.
      */
     @GetMapping("/fakeDeleteByID")
     public ApiResponseDTO fakeDeleteByID(@ApiParam(value = "业务数据的id 是假删除") @RequestParam(value = "_id") ID _id) {

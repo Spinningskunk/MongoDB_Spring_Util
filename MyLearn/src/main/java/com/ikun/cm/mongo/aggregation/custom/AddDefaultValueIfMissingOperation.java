@@ -9,10 +9,17 @@ import java.util.List;
 
 /**
  * @author: HeKun
- * @date: 2023/8/2 9:54
- * @description: 低版本spring-mongo可用
- * 这个功能是 如果一个对象中没有这个字段 我们就可以给他赛一个默认值
- * 从而避免后面你根据这个字段作为cond的时候 没有这个字段的数据不走逻辑
+ * @date: 2024/8/2 9:54
+ * @description: It's Available for lower versions of spring-mongo.
+ *
+ * This operation is used to assign a default value to a field in a MongoDB document.
+ * hen the field is missing. In many NoSQL scenarios, certain fields might be absent
+ * in some documents, which can lead to issues in processing or querying the data.
+ * If the expected field is missing, this operation will assign it a default value (or null if none is provided).
+ * This can help ensure the integrity of data processing without failing due to missing fields.
+ *
+ * The appropriateness and impact of this operation can be reviewed in the accompanying
+ * `CheckLookUpIdOperation` class in the current directory.
  */
 public class AddDefaultValueIfMissingOperation implements AggregationOperation {
     private final String field;
@@ -25,7 +32,7 @@ public class AddDefaultValueIfMissingOperation implements AggregationOperation {
 
     @Override
     public Document toDocument(AggregationOperationContext context) {
-        // 如果确实没有这个字段 就push为我们给定的值
+        // If the specified field is missing, it assigns the provided default value.
         return new Document("$addFields", new Document(field,
                 new Document("$ifNull", Arrays.asList("$" + field, defaultValue))
         ));
