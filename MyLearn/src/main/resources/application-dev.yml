@@ -1,0 +1,24 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  application:
+    name: MyLearn
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+  data:
+    mongodb:
+      host: 192.168.230.128
+      port: 27017
+      database: MyLearn
+      username: admin
+      password: mongo
+      authentication-database: admin
+server:
+  port: 8088
+  tomcat:
+    uri-encoding: UTF-8
+
