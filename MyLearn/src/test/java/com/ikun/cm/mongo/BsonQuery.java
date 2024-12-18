@@ -87,18 +87,6 @@ public class BsonQuery {
         );
         List<JSONObject> dataList =  mongoTemplate.aggregate(aggregation, Dept.class,JSONObject.class).getMappedResults();
     }
-
-
-    public static Document convertAggregationToBson(Aggregation aggregation) {
-        // 获取Aggregation操作的上下文
-        AggregationOperationContext context = new AggregationOperationContext() {
-
-        };
-
-        // 使用Aggregation的toPipeline()方法来直接获取BSON格式的pipeline
-        return Aggregation.toPipeline(aggregation, context);
-    }
-
     @Test
     public void unSafeLookup(){
         Aggregation aggregation = Aggregation.newAggregation(
