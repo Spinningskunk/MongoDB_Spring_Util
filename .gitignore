@@ -16,3 +16,8 @@ Thumbs.db
 *.jar
 *.war
 *.ear
+
+# 不忽略 pom.xml 和 application.xml
+!pom.xml
+!application.xml
+!application-dev.yml
