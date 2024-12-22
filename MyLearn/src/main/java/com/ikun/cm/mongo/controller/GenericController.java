@@ -27,7 +27,7 @@ public abstract class GenericController<T, ID, S extends GenericService<T, ID>> 
 
 
     /**
-     * 根据id获取整个实体类
+     * Get the entire entity class according to the id.
      * @param entityId
      * @return
      */

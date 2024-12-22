@@ -88,7 +88,7 @@ public class SwitchCaseAggregationOperation implements AggregationOperation {
         // Construct the $switch aggregation operation
         return new Document("$addFields", new Document(this.caseResultFieldName,
                 new Document("$switch", new Document("branches", branches)
-                        // Provide a default value when there are no conditions matche
+                        // Provide a default value when there are no conditions match
                         .append("default", this.defaultValue))
         ));
     }
