@@ -32,7 +32,7 @@ public abstract class GenericController<T, ID, S extends GenericService<T, ID>> 
      * @return
      */
     @GetMapping("getById")
-    public ApiResponseDTO<T> getById(@RequestParam(name = "entityId")@ApiParam(value = "entityId",name = "业务的_id") ID entityId) {
+    public ApiResponseDTO<T> getById(@RequestParam(name = "entityId")@ApiParam(value = "",name = "entityId") ID entityId) {
         return ApiResponseDTO.ok(service.getById(entityId));
     }
 

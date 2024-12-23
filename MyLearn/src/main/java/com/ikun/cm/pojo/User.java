@@ -1,5 +1,7 @@
 package com.ikun.cm.pojo;
 
+import com.ikun.cm.mongo.annotation.SensitiveField;
+import com.ikun.cm.mongo.desensitization.impl.NameMaskStrategy;
 import com.ikun.cm.mongo.pojo.SimpleDBObject;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import java.util.List;
 @Component
 public class User extends SimpleDBObject {
 
+    @SensitiveField(strategy = NameMaskStrategy.class)
     @ApiModelProperty(value = "姓名")
     String name;
 
