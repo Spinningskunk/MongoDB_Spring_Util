@@ -1,6 +1,8 @@
 package com.ikun.cm.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.ikun.cm.mongo.annotation.SensitiveField;
+import com.ikun.cm.mongo.desensitization.GenericSensitiveSerializer;
 import com.ikun.cm.mongo.desensitization.impl.NameMaskStrategy;
 import com.ikun.cm.mongo.pojo.SimpleDBObject;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,9 +19,10 @@ import java.util.List;
  * @description:
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Component
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonSerialize(using = GenericSensitiveSerializer.class)
 public class User extends SimpleDBObject {
 
     @SensitiveField(strategy = NameMaskStrategy.class)
@@ -31,4 +34,5 @@ public class User extends SimpleDBObject {
 
     @ApiModelProperty(value = "角色列表")
     List<String> roles;
+
 }

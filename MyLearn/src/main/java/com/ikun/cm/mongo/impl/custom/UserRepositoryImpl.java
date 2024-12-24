@@ -22,7 +22,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     @Override
     public List<User> customGetAll() {
         User user = new User();
-        user.setName("custom");
+        user.setName("虎虎");
         return Arrays.asList(user);
     }
 }

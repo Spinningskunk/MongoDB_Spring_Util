@@ -2,6 +2,8 @@ package com.ikun.cm.mongo.desensitization.impl;
 
 import com.ikun.cm.mongo.desensitization.SensitiveDataStrategy;
 
+import java.lang.reflect.Field;
+
 /**
  * @author: HeKun
  * @date: 2024/12/24 0:47
@@ -10,8 +12,8 @@ import com.ikun.cm.mongo.desensitization.SensitiveDataStrategy;
 public class AccountMaskStrategy implements SensitiveDataStrategy {
 
     @Override
-    public String desensitizationStrategy(String value) {
-        // TODO
+    public Object mask(Field field, Object object) {
+        // TODO someday maybe not so far...
         return null;
     }
 }

@@ -33,11 +33,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class GenericServiceImpl<T, ID> implements GenericService<T, ID> {
 
     @Autowired
-    MongoTemplate mongoTemplate;
+    private MongoTemplate mongoTemplate;
 
     /**
      * This abstract method will be implemented by Spring to provide the entity's class type.
      * It's required due to Java's generic type erasure.
+     *
      * @return The class of the entity type.
      */
     @Lookup
@@ -55,6 +56,7 @@ public abstract class GenericServiceImpl<T, ID> implements GenericService<T, ID>
     /**
      * Creates a query criteria for entities that do not have the "deleted" field.
      * If the entity has the "deleted" field, the query will include a check to ensure it is not logically deleted.
+     *
      * @param entityClass The class of the entity to check for a "deleted" field.
      * @return A Criteria object to filter out logically deleted entities if the "deleted" field exists.
      */
@@ -63,12 +65,13 @@ public abstract class GenericServiceImpl<T, ID> implements GenericService<T, ID>
         if (Boolean.TRUE.equals(hasDeletedField)) {
             return Criteria.where("deleted").is(false);
         }
-        return new Criteria();
+        return new Criteria(); // Return empty criteria if no "deleted" field.
     }
 
     /**
      * Checks if the entity class contains a "deleted" field.
      * The result is cached to avoid redundant reflection checks.
+     *
      * @param entityClass The class of the entity to check.
      * @return True if the entity contains a "deleted" field, false otherwise.
      */
@@ -101,6 +104,7 @@ public abstract class GenericServiceImpl<T, ID> implements GenericService<T, ID>
 
     /**
      * Retrieves all entities in a paginated format.
+     *
      * @param pageable The pagination information.
      * @return A Page object containing the entities.
      */
@@ -134,6 +138,7 @@ public abstract class GenericServiceImpl<T, ID> implements GenericService<T, ID>
     /**
      * Performs a logical (soft) delete by marking the "deleted" field as true.
      * If the entity class does not have the "deleted" field, an exception is thrown.
+     *
      * @param id The ID of the entity to soft delete.
      */
     @Override
@@ -177,6 +182,7 @@ public abstract class GenericServiceImpl<T, ID> implements GenericService<T, ID>
     /**
      * Updates an entity by matching its ID and setting the provided input fields.
      * This method does not update the ID or the "deleted" field.
+     *
      * @param inputEntity The entity with the new field values.
      */
     @Override
