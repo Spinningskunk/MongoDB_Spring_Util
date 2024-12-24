@@ -10,3 +10,7 @@ utility: n.实用；实用程序；效用；公用事业；公用程序；有用
          adj.多功能的；多用途的；多效用的
 specify v.具体说明，明确规定
 represent v，代表、表示、
+concurrent: 并发的
+optimize: 优化
+refactor: 重构
+syntax: 语法
