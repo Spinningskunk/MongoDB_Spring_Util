@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author HeKun
- * @date 2023/12/4 14:20
+ * @date 2024/12/4 14:20
  * @description:
  * A custom aggregation operation that implements a switch-case logic for MongoDB aggregation pipeline.
  * This operation allows you to conditionally transform values based on the field's content, similar to a
