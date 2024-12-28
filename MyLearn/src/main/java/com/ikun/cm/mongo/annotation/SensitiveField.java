@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
  * @date: 2024/12/24 0:38
  * @description:
  */
-@Target(ElementType.FIELD)  // The field we want to annotate
-@Retention(RetentionPolicy.RUNTIME)  // Annotation will be available at runtime
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface SensitiveField {
 
     /**
