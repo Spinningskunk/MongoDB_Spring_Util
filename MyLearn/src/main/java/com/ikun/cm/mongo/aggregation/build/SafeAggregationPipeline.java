@@ -33,6 +33,11 @@ public class SafeAggregationPipeline {
 
     private static final Set<String> UNSAFE_OPERATORS;
 
+    /**
+     * The name of the collection to which the aggregation pipeline will be applied.
+     */
+    private String collectionName;
+
     static {
         Set<String> unsafeOperators = new HashSet<>();
         unsafeOperators.add("$set");
@@ -51,6 +56,11 @@ public class SafeAggregationPipeline {
     public SafeAggregationPipeline(Document operation) {
         this.operations = new ArrayList<>();
         try {
+            if (operation.containsKey("aggregate")) {
+                // Get the collection name from the aggregate operation
+                collectionName = operation.getString("aggregate");
+                log.debug("Collection name retrieved: {}", collectionName);
+            }
             if (operation.containsKey(pipeline)) {
                 Object pipelineStages = operation.get(pipeline);
                 if (pipelineStages instanceof List) {
@@ -69,7 +79,6 @@ public class SafeAggregationPipeline {
             }
         } catch (Exception e) {
             log.error("Failed to build aggregation pipeline: {}", operation.toJson(), e);
-
             // Add a no-op as a fallback
             operations.add(context -> new Document());
         }
@@ -95,5 +104,17 @@ public class SafeAggregationPipeline {
      */
     public List<AggregationOperation> getOperations() {
         return operations;
+    }
+
+    /**
+     * Retrieves the collection name used in the aggregation pipeline.
+     *
+     * @return The name of the target collection.
+     */
+    public String getCollectionName() {
+        if (collectionName == null) {
+            throw new IllegalStateException("Collection name is not specified in the operation.");
+        }
+        return collectionName;
     }
 }

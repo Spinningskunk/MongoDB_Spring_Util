@@ -31,12 +31,12 @@ public class BsonQuery {
 
     @Test
     public void str2Query(){
-        String str = "{ \"aggregate\" : \"__collection__\", \"pipeline\" : [{ \"$project\" : { \"deptName\" : 1, \"parentDeptId\" : 1, \"createTime\" : 1, \"notes\" : \"$marks\"}}, { \"$group\" : { \"_id\" : \"$parentDeptId\", \"sonCount\" : { \"$sum\" : 1}}}]}";
+        String str = "{ \"aggregate\" : \"dept\", \"pipeline\" : [{ \"$project\" : { \"deptName\" : 1, \"parentDeptId\" : 1, \"createTime\" : 1, \"notes\" : \"$marks\"}}, { \"$group\" : { \"_id\" : \"$parentDeptId\", \"sonCount\" : { \"$sum\" : 1}}}]}";
         Document bsonQuery = Document.parse(str);
         CustomAggregationPipeline customPipeline = new CustomAggregationPipeline(bsonQuery);
         SafeAggregationPipeline safeAggregationOperation = new SafeAggregationPipeline(bsonQuery);
         Aggregation aggregation = Aggregation.newAggregation(safeAggregationOperation.getOperations());
-        List<JSONObject> dataList =  mongoTemplate.aggregate(aggregation, JSONObject.class,JSONObject.class).getMappedResults();
+        List<JSONObject> dataList =  mongoTemplate.aggregate(aggregation,safeAggregationOperation.getCollectionName() ,JSONObject.class).getMappedResults();
     }
 
     @Test
