@@ -1,6 +1,9 @@
 package com.ikun.cm.mongo.aggregation.build;
 
+import com.mongodb.client.ClientSession;
+import com.mongodb.client.MongoClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.bson.Document;
 import java.util.ArrayList;

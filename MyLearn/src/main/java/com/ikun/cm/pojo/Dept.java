@@ -17,8 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(value = "a simple dept class")
 public class Dept extends RichDBObject {
-
-
+    
     @ApiModelProperty("the name of dept")
     private String deptName;
 
